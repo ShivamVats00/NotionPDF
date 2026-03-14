@@ -1,0 +1,17 @@
+{
+    "functions": {
+        "api/generate-pdf.ts": {
+            "maxDuration": 60,
+            "memory": 1024
+        },
+        "api/auth/*.ts": {
+            "maxDuration": 10
+        }
+    },
+    "rewrites": [
+        {
+            "source": "/((?!api/).*)",
+            "destination": "/index.html"
+        }
+    ]
+}
