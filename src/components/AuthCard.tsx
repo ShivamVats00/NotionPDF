@@ -3,7 +3,7 @@ import { Header } from './Header';
 export function AuthCard({ onLogin }: { onLogin: () => void }) {
     return (
         <div className="w-full max-w-lg">
-            <Header subtitle="Convert any Notion page — including all nested subpages — into a beautifully formatted, downloadable PDF document." />
+            <Header subtitle="Export Notion pages to PDF, instantly. Nested subpages included." />
             
             <div className="glass-card p-8 text-center">
                 <div className="mb-6">
