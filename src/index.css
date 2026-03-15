@@ -191,10 +191,14 @@
 }
 
 .page-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 12px;
-  padding: 12px 14px;
+  padding: 16px;
   transition: all 0.2s ease;
 }
 
@@ -208,17 +212,10 @@
   border-color: rgba(99, 102, 241, 0.18);
 }
 
-.page-item-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .page-item-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   min-width: 0;
   flex: 1;
 }
@@ -227,11 +224,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
+  width: 36px;
+  height: 36px;
+  font-size: 1.25rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
 }
 
@@ -242,7 +240,7 @@
 }
 
 .page-title {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-primary);
   white-space: nowrap;
@@ -251,9 +249,9 @@
 }
 
 .page-date {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 /* ─── Download Button ──────────────────────────────────────── */
@@ -261,32 +259,61 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  border-radius: 10px;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 8px;
   background: rgba(99, 102, 241, 0.08);
-  color: var(--accent);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
+.page-download-btn svg {
+  color: var(--accent);
+  transition: all 0.2s ease;
+}
+
 .page-download-btn:hover:not(:disabled) {
-  background: rgba(99, 102, 241, 0.18);
-  border-color: rgba(99, 102, 241, 0.4);
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
   transform: translateY(-1px);
 }
 
+.page-download-btn:hover:not(:disabled) svg {
+  color: #fff;
+}
+
 .page-download-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
 .page-download-done {
-  background: rgba(34, 197, 94, 0.12);
+  background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.3);
+  color: var(--success);
+}
+
+.page-download-done svg {
+  color: var(--success);
+}
+
+.page-download-done:hover:not(:disabled) {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: var(--success);
+  box-shadow: none;
+  transform: none;
+}
+
+.page-download-done:hover:not(:disabled) svg {
   color: var(--success);
 }
 
