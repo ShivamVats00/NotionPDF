@@ -91,13 +91,13 @@ async function startServer() {
             }
 
             const formattedId = formatId(pageId);
-            console.log(`[API] 📄 Processing page: ${formattedId}`);
+            console.log(`[API] Processing page: ${formattedId}`);
 
             // Phase 1: Fetch from Notion
-            console.log(`[API] ⏳ Fetching Notion content...`);
+            console.log(`[API] Fetching Notion content...`);
             const notion = getNotionClient(user.access_token);
             const pageTree = await buildPageTree(notion, formattedId);
-            console.log(`[API] ✅ Fetched ${pageTree.blocks.length} blocks, ${pageTree.children.length} child pages (${Date.now() - startTime}ms)`);
+            console.log(`[API] Fetched ${pageTree.blocks.length} blocks, ${pageTree.children.length} child pages (${Date.now() - startTime}ms)`);
 
             if (pageTree.blocks.length === 0 && pageTree.children.length === 0) {
                 res.status(404).json({
@@ -107,14 +107,14 @@ async function startServer() {
             }
 
             // Phase 2: Convert to HTML
-            console.log(`[API] ⏳ Building HTML...`);
+            console.log(`[API] Building HTML...`);
             const fullHtml = buildFullHtml(pageTree);
-            console.log(`[API] ✅ HTML built (${fullHtml.length} chars, ${Date.now() - startTime}ms)`);
+            console.log(`[API] HTML built (${fullHtml.length} chars, ${Date.now() - startTime}ms)`);
 
             // Phase 3: Generate PDF
-            console.log(`[API] ⏳ Launching Puppeteer and generating PDF...`);
+            console.log(`[API] Launching Puppeteer and generating PDF...`);
             const pdfBuffer = await generatePdf(fullHtml);
-            console.log(`[API] ✅ PDF generated (${(pdfBuffer.length / 1024).toFixed(1)} KB, ${Date.now() - startTime}ms total)`);
+            console.log(`[API] PDF generated (${(pdfBuffer.length / 1024).toFixed(1)} KB, ${Date.now() - startTime}ms total)`);
 
             // Send PDF
             res.setHeader('Content-Type', 'application/pdf');
@@ -122,7 +122,7 @@ async function startServer() {
             res.setHeader('Content-Length', pdfBuffer.length.toString());
             res.end(pdfBuffer);
         } catch (err: any) {
-            console.error(`[API] ❌ Error (${Date.now() - startTime}ms):`, err);
+            console.error(`[API] Error (${Date.now() - startTime}ms):`, err);
 
             const message =
                 err?.code === 'object_not_found'
@@ -136,9 +136,9 @@ async function startServer() {
     });
 
     const server = app.listen(PORT, () => {
-        console.log(`\n  🚀 API dev server running at http://localhost:${PORT}`);
-        console.log(`  🔐 Auth: http://localhost:${PORT}/api/auth/authorize`);
-        console.log(`  📄 POST http://localhost:${PORT}/api/generate-pdf\n`);
+        console.log(`\n  API dev server running at http://localhost:${PORT}`);
+        console.log(`  Auth: http://localhost:${PORT}/api/auth/authorize`);
+        console.log(`  POST http://localhost:${PORT}/api/generate-pdf\n`);
     });
     server.timeout = 300000; // 5 minutes for long-running PDF generation
 }
