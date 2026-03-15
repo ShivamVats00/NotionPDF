@@ -96,26 +96,40 @@ export function PageList({
                                     <div className="page-item">
                                         <div className="page-item-info">
                                             <span className="page-icon">{page.icon || '📄'}</span>
-                                            <div className="page-text">
-                                                <div className="page-title">{page.title || 'Untitled'}</div>
-                                                <div className="page-meta">
+                                            <div className="page-details">
+                                                <div className="page-title" title={page.title || 'Untitled'}>{page.title || 'Untitled'}</div>
+                                                <div className="page-date">
                                                     Edited {formatDate(page.lastEdited)}
                                                 </div>
                                             </div>
                                         </div>
 
                                         <button
-                                            className={`page-download-btn ${isDownloading ? 'downloading' : ''}`}
+                                            className={`page-download-btn ${isDone ? 'page-download-done' : ''}`}
                                             onClick={() => onDownload(page.id, page.title)}
                                             disabled={isDownloading && !isError}
                                         >
-                                            {isDone
-                                                ? '✅ Done'
-                                                : isDownloading
-                                                    ? '⬇ ...'
-                                                    : isError
-                                                        ? '↻ Retry'
-                                                        : '⬇ PDF'}
+                                            {isDone ? (
+                                                <>
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                                    Downloaded
+                                                </>
+                                            ) : isDownloading ? (
+                                                <>
+                                                    <div className="spinner-sm"></div>
+                                                    Generating...
+                                                </>
+                                            ) : isError ? (
+                                                <>
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                                    Retry
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                                    Download PDF
+                                                </>
+                                            )}
                                         </button>
                                     </div>
 
